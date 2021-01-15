@@ -1,5 +1,5 @@
 [package]
-name = "filesh"
+name = "filx"
 version = "0.1.0"
 authors = ["pradeep-selva <pradeepselvaraju@gmail.com>"]
 edition = "2018"

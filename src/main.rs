@@ -14,9 +14,13 @@ fn main() {
         let mut extensions: Vec<String> = Vec::new();
 
         match cli.command.as_str() {
-            "run" => {
+            "all" => {
                 for path in paths {
-                    let file_name: String = path.unwrap().path().display().to_string().replace("./", "");
+                    let file_name: String = path.unwrap()
+                                    .path()
+                                    .display()
+                                    .to_string()
+                                    .replace("./", "");
                     let new_file = file_name.to_owned();
 
                     let extension = utils::get_extension(file_name);
@@ -31,8 +35,8 @@ fn main() {
                     
                         let dir_name = extensions.last().clone().unwrap();
                         match fs::create_dir("./".to_string()+dir_name) {
-                            Ok(_) => println!("CREATED: {}", dir_name),
-                            Err(e) => println!("ERROR: {:?}", e)
+                            Ok(_) => println!("{}: {}","CREATED".bold(), dir_name),
+                            Err(e) => println!("{}: {:?}","ERROR".bold().red(), e)
                         };
 
                     }
@@ -43,21 +47,31 @@ fn main() {
                         let dir_to_paste = "./".to_string()+&extension+"/"+&new_file; 
 
                         match fs::copy(file_to_copy, dir_to_paste) {
-                            Ok(_) => println!("COPIED: {}", new_file),
-                            Err(e) => println!("ERROR: {:?}", e)
+                            Ok(_) => println!("{}: {}","COPIED".bold(), new_file),
+                            Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
                         }
 
                         match fs::remove_file(file_to_delete) {
-                            Ok(_) => println!("REMOVED: {}", new_file),
-                            Err(e) => println!("ERROR: {}", e)
+                            Ok(_) => println!("{}: {}","REMOVED".bold(), new_file),
+                            Err(e) => println!("{}: {:?}","ERROR".bold().red(), e)
                         }
                     }
                 }
             },
-            _ => println!("Unrecognized command")
+            "ext" => {
+                match cli.extension_type {
+                    None => println!("{}", 
+                            "Enter a valid extension type with the -t (or) -type flag.".red()
+                            .bold()),
+                    Some(ext_type) => println!("{}", ext_type)
+                }
+            }
+            _ => {
+                println!("{}", "-- Unrecognized command -- \n".red().bold());
+                utils::display_help();
+            }
         }
     } else {
-        println!("{}", "Available arguments -- ".green().bold().italic());
-        println!("{} -- {}", "1. run".cyan().bold(), "organize files based on their extension.".cyan());
+        utils::display_help();
     }
 }
