@@ -1,3 +1,5 @@
+use std::env;
+
 pub fn get_extension(path: String) -> String {
     let path_name: Vec<&str> = path.split('.').collect::<Vec<&str>>();
 
@@ -6,5 +8,13 @@ pub fn get_extension(path: String) -> String {
         return extension.to_string();
     } else {
         return "".to_string();
+    }
+}
+
+pub fn is_args_empty() -> bool {
+    if env::args().len() > 1 {
+        return true;
+    } else {
+        return false;
     }
 }
