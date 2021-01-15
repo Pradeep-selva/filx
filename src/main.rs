@@ -39,11 +39,17 @@ fn main() {
 
                     if should_copy {
                         let file_to_copy = "./".to_string()+&new_file;
+                        let file_to_delete = file_to_copy.to_owned();
                         let dir_to_paste = "./".to_string()+&extension+"/"+&new_file; 
 
                         match fs::copy(file_to_copy, dir_to_paste) {
                             Ok(_) => println!("COPIED: {}", new_file),
                             Err(e) => println!("ERROR: {:?}", e)
+                        }
+
+                        match fs::remove_file(file_to_delete) {
+                            Ok(_) => println!("REMOVED: {}", new_file),
+                            Err(e) => println!("ERROR: {}", e)
                         }
                     }
                 }
