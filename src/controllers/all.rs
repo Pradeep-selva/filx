@@ -12,12 +12,17 @@ pub fn control(paths: fs::ReadDir) {
 
     match args.variant {
         Some(variant) => {
+            println!("{}", variant);
             match variant.as_str() {
+                "default" => (),
                 "persist" => should_persist = true,
                 "backup" => should_backup = true,
-                _ => println!("{} {} \n run --help for more info.", 
+                _ => {
+                    println!("{} {} \n run --help for more info.", 
                         "Unrecognized variant -- use ".red().bold(), 
-                        "default, persist, backup.".bold())
+                        "default, persist, backup.".bold());
+                    return;
+                }
             }
         },
         None => ()
@@ -60,7 +65,7 @@ pub fn control(paths: fs::ReadDir) {
             let file_to_copy = "./".to_string()+&new_file;
             let file_to_delete = file_to_copy.to_owned();
             let dir_to_paste = "./".to_string()+&extension+"/"+&new_file;
-             
+
             let file_to_backup = file_to_copy.to_owned();
             let dir_to_backup = "./filx_backups".to_string()+"/"+&new_file;
 

@@ -11,7 +11,6 @@ fn main() {
 
     if is_arg {
         let args = types::Args::from_args();
-        println!("{:?}", args.variant);
 
         match args.command.as_str() {
             "all" => controllers::all_controller(paths),
