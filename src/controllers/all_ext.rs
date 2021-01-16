@@ -4,7 +4,7 @@ use colored::*;
 #[path = "../types.rs"] mod types;
 #[path = "./utils.rs"] mod utils;
 
-pub fn control(paths: fs::ReadDir) {
+pub fn control(paths: fs::ReadDir, extension_to_check: String) {
     let mut extensions:Vec<String> = Vec::new();
 
     let mut should_persist = false;
@@ -46,7 +46,12 @@ pub fn control(paths: fs::ReadDir) {
 
         let extension = utils::get_extension(file_name);
         
-        let should_copy = !extension.is_empty();
+        let mut should_copy = !extension.is_empty();
+
+        if !extension_to_check.is_empty() {
+            should_copy = should_copy && extension == extension_to_check;
+        }
+
         let should_append = !extensions.contains(&extension) && should_copy;
         
         if should_append {

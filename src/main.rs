@@ -25,14 +25,7 @@ fn main() {
 
         match command.as_str() {
             "all" => controllers::all_controller(paths),
-            "ext" => {
-                match args.extension_type {
-                    None => println!("{}", 
-                            "Enter a valid extension type with the -t (or) -type flag.".red()
-                            .bold()),
-                    Some(ext_type) => println!("{}", ext_type)
-                }
-            }
+            "ext" => controllers::ext_controller(paths),
             _ => {
                 println!("{}", "-- Unrecognized command -- \n".red().bold());
                 utils::display_help();
