@@ -85,7 +85,7 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: S
 
             match fs::create_dir("./".to_string()+search_content.as_str()) {
                 Ok(_) => utils::log_success("CREATED", search_content.as_str()),
-                Err(e) => utils::log_error(e)
+                Err(_) => ()
             };
         }
 

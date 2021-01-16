@@ -62,7 +62,7 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String) {
             let dir_name = extensions.last().clone().unwrap();
             match fs::create_dir("./".to_string()+dir_name) {
                 Ok(_) => utils::log_success("CREATED", dir_name),
-                Err(e) => utils::log_error(e)
+                Err(_) => () 
             };
         }
 
