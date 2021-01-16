@@ -1,9 +1,27 @@
 use std::fs;
+use structopt::StructOpt;
 use colored::*;
+#[path = "../types.rs"] mod types;
 #[path = "./utils.rs"] mod utils;
 
 pub fn control(paths: fs::ReadDir) {
     let mut extensions:Vec<String> = Vec::new();
+    let mut should_persist = false;
+    let mut should_backup = false;
+    let args = types::Args::from_args();
+
+    match args.variant {
+        Some(variant) => {
+            match variant.as_str() {
+                "persist" => should_persist = true,
+                "backup" => should_backup = true,
+                _ => println!("{} {} \n run --help for more info.", 
+                        "Unrecognized variant -- use ".red().bold(), 
+                        "default, persist, backup.".bold())
+            }
+        },
+        None => ()
+    }
 
     for path in paths {
         let file_name: String = path.unwrap()

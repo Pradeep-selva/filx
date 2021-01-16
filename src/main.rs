@@ -10,12 +10,13 @@ fn main() {
     let is_arg = utils::is_args_empty();
 
     if is_arg {
-        let cli = types::Cli::from_args();
+        let args = types::Args::from_args();
+        println!("{:?}", args.variant);
 
-        match cli.command.as_str() {
+        match args.command.as_str() {
             "all" => controllers::all_controller(paths),
             "ext" => {
-                match cli.extension_type {
+                match args.extension_type {
                     None => println!("{}", 
                             "Enter a valid extension type with the -t (or) -type flag.".red()
                             .bold()),
