@@ -31,7 +31,8 @@ fn main() {
             "contains" => controllers::search_controller(paths, 2),
             "prepend" => controllers::rename_controller(paths, 0),
             "append" => controllers::rename_controller(paths, 1),
-            "date" => controllers::rename_controller(paths, 2),
+            "prepend-date" => controllers::rename_controller(paths, 2),
+            "append-date" => controllers::rename_controller(paths, 3),
             "seed" => controllers::seed_controller(),
             _ => {
                 println!("{}", "-- Unrecognized command -- \n".red().bold());

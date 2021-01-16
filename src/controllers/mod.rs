@@ -53,11 +53,15 @@ pub fn rename_controller(paths: fs::ReadDir, rename_type: i32) {
         None => ()
     }
 
-    match args.text {
-        Some(text) => rename::control(paths, extension_to_check, search_content, text, rename_type),
-        None => println!("{}\n{}", 
-                "Enter a valid text to manipulate name with --text flag.".red()
-                .bold(), "Run -h (or) --help for more info.".green().bold()) 
+    if rename_type == 0 || rename_type == 1 {
+        match args.text {
+            Some(text) => rename::control(paths, extension_to_check, search_content, text, rename_type),
+            None => println!("{}\n{}", 
+                    "Enter a valid text to manipulate name with --text flag.".red()
+                    .bold(), "Run -h (or) --help for more info.".green().bold()) 
+        }
+    } else {
+        rename::control(paths, extension_to_check, search_content, "".to_string(), rename_type)
     }
 }
 

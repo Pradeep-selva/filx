@@ -1,11 +1,15 @@
 use std::fs;
+use colored::*;
 #[path = "../types.rs"] mod types;
 #[path = "./utils.rs"] mod utils;
+use chrono::prelude::DateTime;
+use chrono::Utc;
 
 // rename types --
 // 0 -> prepend
 // 1 -> append
-// 2 -> date
+// 2 -> prepend-date
+// 3 => append-date
 
 pub fn control(
     paths: fs::ReadDir, 
@@ -45,6 +49,21 @@ pub fn control(
             } else if rename_type == 1 {
                 let file_name_without_extension = utils::get_file_name_without_extension(new_file);
                 changed_file_name = file_name_without_extension + text.as_str() + "." + &extension;
+            } else if rename_type == 2 {
+                match fs::metadata(new_file) {
+                    Ok(meta) => {
+                        if let Ok(time) = meta.modified() {
+                            let datetime: DateTime<Utc> = time.into();
+                            let timestamp_str = datetime.format("%Y-%m-%d").to_string();
+                            changed_file_name = timestamp_str+"_"+ old_file_name.as_str();
+
+                            println!("{:?}", changed_file_name);
+                        } else {
+                            println!("{}", "Not supported on this platform".red().bold());
+                        }
+                    },
+                    Err(_) => ()
+                }
             }
 
             changed_file_name = "./".to_string() + changed_file_name.as_str();
