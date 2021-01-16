@@ -33,7 +33,7 @@ pub fn get_prefix_or_suffix_or_contain(file_name: String, search_term: &str) -> 
 
     let split_name: Vec<&str> = file_name.split(&search_term.to_lowercase())
                                     .collect::<Vec<&str>>();
-    
+
     if split_name.len() < 2 {
         return -1;
     } else {

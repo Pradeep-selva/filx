@@ -19,7 +19,6 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: S
 
     match args.variant {
         Some(variant) => {
-            println!("{}", variant);
             match variant.as_str() {
                 "default" => (),
                 "persist" => should_persist = true,
@@ -56,6 +55,7 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: S
 
         let file_to_check = new_file.to_owned();
         let file_name_without_extension = utils::get_file_name_without_extension(file_to_check);
+        let fname_if_contains = file_name_without_extension.to_owned();
         let mut is_present = false;
 
         if search_type == utils::get_prefix_or_suffix_or_contain(
@@ -63,7 +63,12 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: S
             search_content.as_str()
         ) {
             is_present = true;
-        }
+        } else if search_type == 2 && utils::get_prefix_or_suffix_or_contain(
+            fname_if_contains, 
+            search_content.as_str()
+        ) != -1 {
+            is_present = true;
+        } 
 
         should_copy = should_copy && is_present;
 

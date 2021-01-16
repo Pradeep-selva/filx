@@ -26,7 +26,9 @@ fn main() {
         match command.as_str() {
             "all" => controllers::all_controller(paths),
             "ext" => controllers::ext_controller(paths),
-            "prefix" => controllers::prefix_controller(paths),
+            "prefix" => controllers::search_controller(paths, 0),
+            "suffix" => controllers::search_controller(paths, 1),
+            "contains" => controllers::search_controller(paths, 2),
             _ => {
                 println!("{}", "-- Unrecognized command -- \n".red().bold());
                 utils::display_help();

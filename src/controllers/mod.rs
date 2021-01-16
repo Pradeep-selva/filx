@@ -20,17 +20,17 @@ pub fn ext_controller(paths: fs::ReadDir) {
     }
 }
 
-pub fn prefix_controller(paths: fs::ReadDir) {
+pub fn search_controller(paths: fs::ReadDir, search_type: i32) {
     let args = types::Args::from_args();
 
     match args.search_content {
         None => println!("{}\n{}", 
-                "Enter a valid search content with the -sc (or) --search-content flag.".red()
+                "Enter a valid search content with the --search-content flag.".red()
                 .bold(), "Run -h (or) --help for more info.".green().bold()),
         Some(search_content) => {
             match args.extension_type {
-                None => search::control(paths, "".to_string(), search_content, 0),
-                Some(ext_type) => search::control(paths, ext_type, search_content, 0)
+                None => search::control(paths, "".to_string(), search_content, search_type),
+                Some(ext_type) => search::control(paths, ext_type, search_content, search_type)
             }
         }
     }
