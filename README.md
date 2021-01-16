@@ -14,6 +14,28 @@
 
 ## Installation
 
+- Create a folder and inside the folder run,
+
+```
+wget https://raw.githubusercontent.com/Pradeep-selva/filx/master/filx
+```
+
+- Give the "filx" binary file executable permissions using,
+
+```
+chmod +x filx
+```
+
+- Add file to path. To add filx to your current shell run,
+
+```
+export PATH="$HOME/<your-folder>:$PATH"
+```
+
+- To add file to path permanently, add the above line to your `~/.bash_profile` or `~/.profile`
+
+**(OR)**
+
 - Run the following command
 
 ```
@@ -22,7 +44,7 @@ curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git Pradeep-s
 
 - Add the binary to your path.
 
-(or)
+**(OR)**
 
 - Using cargo, install the filx crate, using
 
