@@ -11,6 +11,7 @@ pub fn get_extension(path: String) -> String {
     }
 }
 
+#[allow(dead_code)]
 pub fn get_file_name_without_extension(path: String) -> String {
    let path_name: Vec<&str> = path.split('.').collect::<Vec<&str>>();
 
@@ -22,6 +23,7 @@ pub fn get_file_name_without_extension(path: String) -> String {
     } 
 }
 
+#[allow(dead_code)]
 pub fn get_prefix_or_suffix_or_contain(file_name: String, search_term: &str) -> i32 {
 
     // -1 -> not found

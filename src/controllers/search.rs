@@ -4,7 +4,13 @@ use colored::*;
 #[path = "../types.rs"] mod types;
 #[path = "./utils.rs"] mod utils;
 
-pub fn control(paths: fs::ReadDir, extension_to_check: String) {
+// search type --
+// -1 -> none
+// 0 -> prefix
+// 1 -> suffix
+// 2 -> contains
+
+pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: String, search_type: i32) {
     let mut extensions:Vec<String> = Vec::new();
 
     let mut should_persist = false;
@@ -48,6 +54,19 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String) {
         
         let mut should_copy = !extension.is_empty();
 
+        let file_to_check = new_file.to_owned();
+        let file_name_without_extension = utils::get_file_name_without_extension(file_to_check);
+        let mut is_present = false;
+
+        if search_type == utils::get_prefix_or_suffix_or_contain(
+            file_name_without_extension, 
+            search_content.as_str()
+        ) {
+            is_present = true;
+        }
+
+        should_copy = should_copy && is_present;
+
         if !extension_to_check.is_empty() {
             should_copy = should_copy && extension == extension_to_check;
         }
@@ -59,9 +78,8 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String) {
         
             extensions.push(extension);
 
-            let dir_name = extensions.last().clone().unwrap();
-            match fs::create_dir("./".to_string()+dir_name) {
-                Ok(_) => utils::log_success("CREATED", dir_name),
+            match fs::create_dir("./".to_string()+search_content.as_str()) {
+                Ok(_) => utils::log_success("CREATED", search_content.as_str()),
                 Err(e) => utils::log_error(e)
             };
         }
@@ -69,7 +87,7 @@ pub fn control(paths: fs::ReadDir, extension_to_check: String) {
         if should_copy {
             let file_to_copy = "./".to_string()+&new_file;
             let file_to_delete = file_to_copy.to_owned();
-            let dir_to_paste = "./".to_string()+&extension+"/"+&new_file;
+            let dir_to_paste = "./".to_string()+search_content.as_str()+"/"+&new_file;
 
             let file_to_backup = file_to_copy.to_owned();
             let dir_to_backup = "./filx_backups".to_string()+"/"+&new_file;
