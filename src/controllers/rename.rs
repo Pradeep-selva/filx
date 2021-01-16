@@ -43,7 +43,8 @@ pub fn control(
             if rename_type == 0 {
                 changed_file_name = rename_text + new_file.as_str();
             } else if rename_type == 1 {
-                changed_file_name = new_file + text.as_str();
+                let file_name_without_extension = utils::get_file_name_without_extension(new_file);
+                changed_file_name = file_name_without_extension + text.as_str() + "." + &extension;
             }
 
             changed_file_name = "./".to_string() + changed_file_name.as_str();
