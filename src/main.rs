@@ -11,8 +11,19 @@ fn main() {
 
     if is_arg {
         let args = types::Args::from_args();
+        let command: String;
 
-        match args.command.as_str() {
+        if args.help {
+            utils::display_help();
+            return;
+        }
+
+        match args.command {
+            Some(c) => command = c,
+            None => command = String::from(""),
+        }
+
+        match command.as_str() {
             "all" => controllers::all_controller(paths),
             "ext" => {
                 match args.extension_type {
