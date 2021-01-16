@@ -46,7 +46,13 @@ curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git Pradeep-s
 
 **(OR)**
 
-- Using cargo, install the filx crate, using
+- Install rust, rustup and cargo, using,
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+- Using cargo, install the filx crate, using,
 
 ```
 cargo install filx
