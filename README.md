@@ -22,6 +22,14 @@ curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git Pradeep-s
 
 - Add the binary to your path.
 
+(or)
+
+- Using cargo, install the filx crate, using
+
+```
+cargo install filx
+```
+
 ## Usage
 
 - The following is the list of available commands, options and flags --
