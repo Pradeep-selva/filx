@@ -18,12 +18,20 @@ pub fn display_help() {
     println!("{} -- {}", "1. filx run".cyan().bold(), "organize files based on their extension.".cyan());
     println!("{} -- {}", "2. filx ext --type <extension>".cyan().bold(), 
     "organize files based on specific extension (all extensions if no type provided).".cyan());
-    println!("{} -- {}", "2. filx prefix --content <string>".cyan().bold(), 
+    println!("{} -- {}", "3. filx prefix --content <string>".cyan().bold(), 
     "organize files based on their file name prefix.".cyan());
-    println!("{} -- {}", "2. filx suffix --content <string>".cyan().bold(), 
+    println!("{} -- {}", "4. filx suffix --content <string>".cyan().bold(), 
     "organize files based on their file name suffix.".cyan());
-    println!("{} -- {}", "2. filx contains --content <string>".cyan().bold(), 
+    println!("{} -- {}", "5. filx contains --content <string>".cyan().bold(), 
     "organize files based on text contained in their filename.".cyan());
+    println!("{} -- {}", "6. filx prepend --text <string>".cyan().bold(), 
+    "prepend a text to all files.".cyan());
+    println!("{} -- {}", "7. filx append --text <string>".cyan().bold(), 
+    "append a text to all files.".cyan());
+    println!("{} -- {}", "8. filx prepend-date".cyan().bold(), 
+    "prepend the last modified date of all files to themselves.".cyan());
+    println!("{} -- {}", "9. filx append-date".cyan().bold(), 
+    "append the last modified date of all files to themselves".cyan());
     
     println!("{}", "\nOPTIONS -- ".green().bold().italic());
     println!("{} -- {}", "1. --variant <variant>".cyan().bold(), 
@@ -45,6 +53,11 @@ pub fn display_help() {
         "enter any text to search in filename and organize.".cyan());
     println!("\t{}: {}", "NOTE".bold().underline(), 
     "type can be chained to prefix, suffix and contains".cyan());
+
+    println!("{} -- {}", "4. --text <string>".cyan().bold(), 
+        "enter any text to append/prepend.".cyan());
+    println!("\t{}: {}", "NOTE".bold().underline(), 
+    "type can be chained to append, prepend".cyan());
     
     println!("{}", "\nFLAGS -- ".green().bold().italic());
     println!("{} -- {}", "1. -V (or) --version".cyan().bold(), "See your filx version".cyan());
