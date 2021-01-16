@@ -2,6 +2,12 @@
 name = "filx"
 version = "0.1.0"
 authors = ["pradeep-selva <pradeepselvaraju@gmail.com>"]
+description="A simple, fast file organization tool"
+keywords=["file", "organize", "fast", "clean", "efficiency", "script"]
+categories = ["command-line-interface"]
+respository="https://github.com/Pradeep-selva/filx"
+license="MIT"
+readme="README.md"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
