@@ -47,8 +47,12 @@ pub fn control(
             if rename_type == 0 {
                 changed_file_name = rename_text + new_file.as_str();
             } else if rename_type == 1 {
-                let file_name_without_extension = utils::get_file_name_without_extension(new_file);
-                changed_file_name = file_name_without_extension + text.as_str() + "." + &extension;
+                if !extension.is_empty() {
+                    let file_name_without_extension = utils::get_file_name_without_extension(new_file);
+                    changed_file_name = file_name_without_extension + text.as_str() + "." + &extension;
+                } else {
+                    changed_file_name = new_file + rename_text.as_str();
+                }
             } else if rename_type == 2 {
                 match fs::metadata(new_file) {
                     Ok(meta) => {
