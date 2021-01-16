@@ -7,6 +7,9 @@ pub struct Args {
 
     pub command: Option<String>,
 
+    #[structopt(short="sc", long="search-content")]
+    pub search_content: Option<String>,
+
     #[structopt(short="var", long="variant")]
     pub variant: Option<String>,
 

@@ -4,7 +4,7 @@ use colored::*;
 #[path = "../types.rs"] mod types;
 #[path = "./utils.rs"] mod utils;
 
-pub fn control(paths: fs::ReadDir, extension_to_check: String) {
+pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: String) {
     let mut extensions:Vec<String> = Vec::new();
 
     let mut should_persist = false;
