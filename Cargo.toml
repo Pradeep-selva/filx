@@ -1,6 +1,6 @@
 [package]
 name = "filx"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["pradeep-selva <pradeepselvaraju@gmail.com>"]
 description="A simple, fast file organization tool"
 keywords=["file", "organize", "fast", "clean", "efficiency"]
