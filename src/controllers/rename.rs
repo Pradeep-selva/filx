@@ -43,6 +43,7 @@ pub fn control(
         if should_rename {
             let mut changed_file_name: String = String::from("");
             let old_file_name = new_file.to_owned();
+            let old_file_name_copy = new_file.to_owned();
 
             if rename_type == 0 {
                 changed_file_name = rename_text + new_file.as_str();
@@ -53,15 +54,23 @@ pub fn control(
                 } else {
                     changed_file_name = new_file + rename_text.as_str();
                 }
-            } else if rename_type == 2 {
+            } else {
                 match fs::metadata(new_file) {
                     Ok(meta) => {
                         if let Ok(time) = meta.modified() {
                             let datetime: DateTime<Utc> = time.into();
                             let timestamp_str = datetime.format("%Y-%m-%d").to_string();
-                            changed_file_name = timestamp_str+"_"+ old_file_name.as_str();
-
-                            println!("{:?}", changed_file_name);
+                            
+                            if rename_type == 2 {
+                                changed_file_name = timestamp_str+"_"+ old_file_name.as_str();
+                            } else {
+                                if !extension.is_empty() {
+                                    let file_name_without_extension = utils::get_file_name_without_extension(old_file_name);
+                                    changed_file_name = file_name_without_extension + "_" + timestamp_str.as_str() + "." + &extension;
+                                } else {
+                                    changed_file_name = old_file_name + "_" + timestamp_str.as_str();
+                                }
+                            }
                         } else {
                             println!("{}", "Not supported on this platform".red().bold());
                         }
@@ -71,10 +80,12 @@ pub fn control(
             }
 
             changed_file_name = "./".to_string() + changed_file_name.as_str();
-            let old_file_name = "./".to_string()+old_file_name.as_str();
-            let display_name = old_file_name.to_owned();
+            let old_file_path = "./".to_string() + old_file_name_copy.as_str();
+            let display_name = old_file_name_copy.to_owned();
 
-            match fs::rename(old_file_name, changed_file_name) {
+            println!("{} {}", old_file_path, display_name);
+
+            match fs::rename(old_file_path, changed_file_name) {
                 Ok(_) => utils::log_success("RENAMED", display_name.as_str()),
                 Err(e) => utils::log_error(e)
             }
