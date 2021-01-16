@@ -11,9 +11,33 @@ pub fn control() {
     let base = "ab";
     let ch: char = 'c';
 
-    for i in 0..40 {
+    for i in 0..10 {
         let new_ch = add_to_char(ch, i).to_string();
         match File::create(base.to_string()+&new_ch+".cpp") {
+            Ok(_) => utils::log_success("CREATED", "New File..."),
+            Err(e) => utils::log_error(e)
+        }
+    }
+
+    for i in 0..10 {
+        let new_ch = add_to_char(ch, i).to_string();
+        match File::create(base.to_string()+&new_ch+".py") {
+            Ok(_) => utils::log_success("CREATED", "New File..."),
+            Err(e) => utils::log_error(e)
+        }
+    }
+
+    for i in 0..10 {
+        let new_ch = add_to_char(ch, i).to_string();
+        match File::create(base.to_string()+&new_ch+".js") {
+            Ok(_) => utils::log_success("CREATED", "New File..."),
+            Err(e) => utils::log_error(e)
+        }
+    }
+
+    for i in 0..10 {
+        let new_ch = add_to_char(ch, i).to_string();
+        match File::create(base.to_string()+&new_ch+".rs") {
             Ok(_) => utils::log_success("CREATED", "New File..."),
             Err(e) => utils::log_error(e)
         }

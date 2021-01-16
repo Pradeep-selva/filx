@@ -52,7 +52,7 @@ pub fn display_help() {
     println!("{} -- {}", "3. --content <string>".cyan().bold(), 
         "enter any text to search in filename and organize.".cyan());
     println!("\t{}: {}", "NOTE".bold().underline(), 
-    "type can be chained to prefix, suffix and contains".cyan());
+    "type can be chained to prefix, suffix, contains, prepend and append".cyan());
 
     println!("{} -- {}", "4. --text <string>".cyan().bold(), 
         "enter any text to append/prepend.".cyan());
