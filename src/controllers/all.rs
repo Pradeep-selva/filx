@@ -23,6 +23,13 @@ pub fn control(paths: fs::ReadDir) {
         None => ()
     }
 
+    if should_backup {
+        match fs::create_dir("./filx_backups") {
+            Ok(_) => println!("{}", "Created backups dir".green().bold()),
+            Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
+        }
+    }
+
     for path in paths {
         let file_name: String = path.unwrap()
                         .path()
@@ -52,16 +59,28 @@ pub fn control(paths: fs::ReadDir) {
         if should_copy {
             let file_to_copy = "./".to_string()+&new_file;
             let file_to_delete = file_to_copy.to_owned();
-            let dir_to_paste = "./".to_string()+&extension+"/"+&new_file; 
+            let dir_to_paste = "./".to_string()+&extension+"/"+&new_file;
+             
+            let file_to_backup = file_to_copy.to_owned();
+            let dir_to_backup = "./filx_backups".to_string()+"/"+&new_file;
 
             match fs::copy(file_to_copy, dir_to_paste) {
                 Ok(_) => println!("{}: {}","COPIED".bold(), new_file),
                 Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
             }
 
-            match fs::remove_file(file_to_delete) {
-                Ok(_) => println!("{}: {}","REMOVED".bold(), new_file),
-                Err(e) => println!("{}: {:?}","ERROR".bold().red(), e)
+            if should_backup {
+               match fs::copy(file_to_backup, dir_to_backup) {
+                    Ok(_) => println!("{}: {}","BACKUP".bold(), new_file),
+                    Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
+                } 
+            }
+
+            if !should_persist {
+                match fs::remove_file(file_to_delete) {
+                    Ok(_) => println!("{}: {}","REMOVED".bold(), new_file),
+                    Err(e) => println!("{}: {:?}","ERROR".bold().red(), e)
+                }
             }
         }
     }
