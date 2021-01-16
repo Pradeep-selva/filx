@@ -29,6 +29,9 @@ fn main() {
             "prefix" => controllers::search_controller(paths, 0),
             "suffix" => controllers::search_controller(paths, 1),
             "contains" => controllers::search_controller(paths, 2),
+            "prepend" => controllers::rename_controller(paths, 0),
+            "append" => controllers::rename_controller(paths, 1),
+            "date" => controllers::rename_controller(paths, 2),
             _ => {
                 println!("{}", "-- Unrecognized command -- \n".red().bold());
                 utils::display_help();

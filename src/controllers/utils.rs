@@ -1,5 +1,6 @@
 use colored::*;
 
+#[allow(dead_code)]
 pub fn get_extension(path: String) -> String {
     let path_name: Vec<&str> = path.split('.').collect::<Vec<&str>>();
 
@@ -47,10 +48,12 @@ pub fn get_prefix_or_suffix_or_contain(file_name: String, search_term: &str) -> 
     }
 }
 
+#[allow(dead_code)]
 pub fn log_success(title: &str, message: &str) {
     println!("{}: {}", title.bold(), message)
 }
 
+#[allow(dead_code)]
 pub fn log_error(error: std::io::Error) {
     println!("{}: {}", "ERROR".red().bold(), error.to_string().red())
 }

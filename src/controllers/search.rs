@@ -10,7 +10,12 @@ use colored::*;
 // 1 -> suffix
 // 2 -> contains
 
-pub fn control(paths: fs::ReadDir, extension_to_check: String, search_content: String, search_type: i32) {
+pub fn control(
+    paths: fs::ReadDir, 
+    extension_to_check: String, 
+    search_content: String, 
+    search_type: i32
+) {
     let mut extensions:Vec<String> = Vec::new();
 
     let mut should_persist = false;
