@@ -4,6 +4,7 @@ use colored::*;
 mod rearrange;
 mod search;
 mod rename;
+mod seed;
 #[path = "../types.rs"] mod types;
 
 pub fn all_controller(paths: fs::ReadDir) {
@@ -58,4 +59,8 @@ pub fn rename_controller(paths: fs::ReadDir, rename_type: i32) {
                 "Enter a valid text to manipulate name with --text flag.".red()
                 .bold(), "Run -h (or) --help for more info.".green().bold()) 
     }
+}
+
+pub fn seed_controller() {
+    seed::control();
 }

@@ -51,7 +51,7 @@ pub fn control(
             let display_name = old_file_name.to_owned();
 
             match fs::rename(old_file_name, changed_file_name) {
-                Ok(_) => utils::log_success("RENAMED:", display_name.as_str()),
+                Ok(_) => utils::log_success("RENAMED", display_name.as_str()),
                 Err(e) => utils::log_error(e)
             }
         }

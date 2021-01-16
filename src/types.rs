@@ -10,12 +10,12 @@ pub struct Args {
     #[structopt(short="c", long="content")]
     pub search_content: Option<String>,
 
-    #[structopt(short="txt", long="text")]
+    #[structopt(long="text")]
     pub text: Option<String>,
 
     #[structopt(short="var", long="variant")]
     pub variant: Option<String>,
 
-    #[structopt(short="t", long="type")]
+    #[structopt(long="type")]
     pub extension_type: Option<String>,
 }

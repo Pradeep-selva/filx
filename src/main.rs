@@ -32,6 +32,7 @@ fn main() {
             "prepend" => controllers::rename_controller(paths, 0),
             "append" => controllers::rename_controller(paths, 1),
             "date" => controllers::rename_controller(paths, 2),
+            "seed" => controllers::seed_controller(),
             _ => {
                 println!("{}", "-- Unrecognized command -- \n".red().bold());
                 utils::display_help();
