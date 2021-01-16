@@ -1,5 +1,6 @@
 mod utils;
 mod types;
+mod environment;
 mod controllers;
 use std::fs;
 use colored::*;
@@ -33,7 +34,13 @@ fn main() {
             "append" => controllers::rename_controller(paths, 1),
             "prepend-date" => controllers::rename_controller(paths, 2),
             "append-date" => controllers::rename_controller(paths, 3),
-            "seed" => controllers::seed_controller(),
+            "seed" => {
+                if environment::get_environment() {
+                    println!("{}", "This command is only available on debug version.".red().bold())
+                } else {
+                    controllers::seed_controller()
+                }
+            },
             _ => {
                 println!("{}", "-- Unrecognized command -- \n".red().bold());
                 utils::display_help();

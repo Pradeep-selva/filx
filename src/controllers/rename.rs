@@ -65,8 +65,10 @@ pub fn control(
                                 changed_file_name = timestamp_str+"_"+ old_file_name.as_str();
                             } else {
                                 if !extension.is_empty() {
-                                    let file_name_without_extension = utils::get_file_name_without_extension(old_file_name);
-                                    changed_file_name = file_name_without_extension + "_" + timestamp_str.as_str() + "." + &extension;
+                                    let file_name_without_extension = 
+                                        utils::get_file_name_without_extension(old_file_name);
+                                    changed_file_name = 
+                                        file_name_without_extension + "_" + timestamp_str.as_str() + "." + &extension;
                                 } else {
                                     changed_file_name = old_file_name + "_" + timestamp_str.as_str();
                                 }
@@ -82,8 +84,6 @@ pub fn control(
             changed_file_name = "./".to_string() + changed_file_name.as_str();
             let old_file_path = "./".to_string() + old_file_name_copy.as_str();
             let display_name = old_file_name_copy.to_owned();
-
-            println!("{} {}", old_file_path, display_name);
 
             match fs::rename(old_file_path, changed_file_name) {
                 Ok(_) => utils::log_success("RENAMED", display_name.as_str()),
