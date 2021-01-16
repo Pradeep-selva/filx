@@ -6,6 +6,7 @@ use colored::*;
 
 pub fn control(paths: fs::ReadDir) {
     let mut extensions:Vec<String> = Vec::new();
+
     let mut should_persist = false;
     let mut should_backup = false;
     let args = types::Args::from_args();
@@ -31,7 +32,7 @@ pub fn control(paths: fs::ReadDir) {
     if should_backup {
         match fs::create_dir("./filx_backups") {
             Ok(_) => println!("{}", "Created backups dir".green().bold()),
-            Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
+            Err(e) => utils::log_error(e)
         }
     }
 
@@ -55,8 +56,8 @@ pub fn control(paths: fs::ReadDir) {
         
             let dir_name = extensions.last().clone().unwrap();
             match fs::create_dir("./".to_string()+dir_name) {
-                Ok(_) => println!("{}: {}","CREATED".bold(), dir_name),
-                Err(e) => println!("{}: {:?}","ERROR".bold().red(), e)
+                Ok(_) => utils::log_success("CREATED", dir_name),
+                Err(e) => utils::log_error(e)
             };
 
         }
@@ -70,21 +71,21 @@ pub fn control(paths: fs::ReadDir) {
             let dir_to_backup = "./filx_backups".to_string()+"/"+&new_file;
 
             match fs::copy(file_to_copy, dir_to_paste) {
-                Ok(_) => println!("{}: {}","COPIED".bold(), new_file),
-                Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
+                Ok(_) => utils::log_success("COPIED", new_file.as_str()),
+                Err(e) => utils::log_error(e)
             }
 
             if should_backup {
                match fs::copy(file_to_backup, dir_to_backup) {
-                    Ok(_) => println!("{}: {}","BACKUP".bold(), new_file),
-                    Err(e) => println!("{}: {:?}", "ERROR".bold().red(), e)
+                    Ok(_) => utils::log_success("BACKUP", new_file.as_str()),
+                    Err(e) => utils::log_error(e)
                 } 
             }
 
             if !should_persist {
                 match fs::remove_file(file_to_delete) {
-                    Ok(_) => println!("{}: {}","REMOVED".bold(), new_file),
-                    Err(e) => println!("{}: {:?}","ERROR".bold().red(), e)
+                    Ok(_) => utils::log_success("REMOVED", new_file.as_str()),
+                    Err(e) => utils::log_error(e)
                 }
             }
         }
