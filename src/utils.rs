@@ -39,9 +39,9 @@ pub fn display_help() {
     println!("\t{}", "available variants".bold().underline());
     println!("\t\t{} -- {}", "1. default".cyan().bold(), 
         "Organize files into their respective folders as specified".cyan());
-    println!("\t\t{} -- {}", "1. persist".cyan().bold(), 
+    println!("\t\t{} -- {}", "2. persist".cyan().bold(), 
         "keep their initial copies intact after organizing".cyan());
-    println!("\t\t{} -- {}", "1. backup".cyan().bold(), 
+    println!("\t\t{} -- {}", "2. backup".cyan().bold(), 
     "take a backup of all organized files in separate folder".cyan());
 
     println!("{} -- {}", "2. --type <file_type>".cyan().bold(), 
